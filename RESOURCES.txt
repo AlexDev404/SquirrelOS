@@ -1,1 +1,5 @@
 https://brennan.io/2015/01/16/write-a-shell-in-c/
+
+https://www.geeksforgeeks.org/making-linux-shell-c/amp/
+
+https://github.com/brenns10/lsh/

@@ -23,3 +23,7 @@ Run with `qemu-system-x86_64 iso/MyOS.iso`.
 ## Source
 The source is in the `src/` Directory
 
+## Contact Info
+
+- Have any questions/requests/issues? Feel free to contact me at:
+  [rexydogwoof@gmail.com](mailto:rexydogwoof@gmail.com).

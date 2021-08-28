@@ -1,32 +1,25 @@
-# SimpleOS
-A simple DOS like OS made in Assembly and C. 
+# SquirrelOS
+A simple DOS like OS made in Assembly and C with a ported version of Stephen Brennan's [LSH](https://github.com/brenns10/lsh) Shell.
 
 ## Build
-Run `sh run.sh`. 
+CD into `src/` and run `sudo ../build.sh`. 
 
 ## Run
 To run the OS, you can download VM software.
 The iso Image is in the `iso` folder.
-Reccomended:
+
+### Recommended:
 - [Virtualbox](https://www.virtualbox.org/wiki/Downloads)
 - [VMware](https://my.vmware.com/web/vmware/downloads/info/slug/desktop_end_user_computing/vmware_fusion/12_0)
 - [QEMU](https://www.qemu.org)
+- Hyper-V
 
 ### Running with VMWARE/Virtualbox
-To run with this, simply insert the iso image, and make sure to chose the `other` option.
+To run with this, simply insert the iso image outputted in `src/out/`, and make sure to choose the `other` option.
 
 ### Running with qemu
 Run with `qemu-system-x86_64 iso/MyOS.iso`.
 
 ## Source
-The source is in the `src` Folder
-
-## Website
-Website coming up soon! Keep tuned!
-
-## Community
-https://discord.gg/ymMAcmVV
-
-# Edit
-I am taking a break from OSdev, and working on some arduino projects (If you are intrested please DM me on discord) . I will return soon hopefully though! A rough guess would be in 3/4 months or so. 
+The source is in the `src/` Directory
 

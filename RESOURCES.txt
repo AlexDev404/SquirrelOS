@@ -1,1 +1,13 @@
+# Useful Links
+
 https://brennan.io/2015/01/16/write-a-shell-in-c/
+
+https://www.geeksforgeeks.org/making-linux-shell-c/amp/
+
+https://github.com/brenns10/lsh/
+
+https://wiki.osdev.org/Text_Mode_Cursor#Enabling_the_Cursor
+
+https://wiki.osdev.org/Text_UI
+
+https://wiki.osdev.org/Bare_Bones

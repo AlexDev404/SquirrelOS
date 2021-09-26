@@ -1,12 +1,13 @@
-# SquirrelOS
+# SquirrelOS - The successor of XeonOS
+<img src="https://raw.githubusercontent.com/AlexDev404/SquirrelOS/main/previewImg/CapturePreview4.PNG"/>
 A simple DOS like OS made in Assembly and C with a ported version of Stephen Brennan's [LSH](https://github.com/brenns10/lsh) Shell.
 
 ## Build
 CD into `src/` and run `sudo ../build.sh`. 
 
 ## Run
-To run the OS, you can download VM software.
-The iso Image is in the `iso` folder.
+To run the OS, you can download VM software. 
+A pre-built ISO image is in the `src/out/` directory.
 
 ### Recommended:
 - [Virtualbox](https://www.virtualbox.org/wiki/Downloads)
@@ -26,4 +27,4 @@ The source is in the `src/` Directory
 ## Contact Info
 
 - Have any questions/requests/issues? Feel free to contact me at:
-  [rexydogwoof@gmail.com](mailto:rexydogwoof@gmail.com).
+  [rexydogwoof01@gmail.com](mailto:rexydogwoof01@gmail.com).

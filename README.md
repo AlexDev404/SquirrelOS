@@ -17,6 +17,7 @@ A pre-built ISO image is in the `./out/` directory.
 - [Virtualbox](https://www.virtualbox.org/wiki/Downloads)
 - [VMware](https://my.vmware.com/web/vmware/downloads/info/slug/desktop_end_user_computing/vmware_fusion/12_0)
 - [QEMU](https://www.qemu.org)
+- [BOCHS](https://bochs.sourceforge.io/)
 - Hyper-V
 
 ### Running with VMWARE/Virtualbox

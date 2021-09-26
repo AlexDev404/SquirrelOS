@@ -5,12 +5,12 @@ A simple DOS like OS made in Assembly and C with a ported version of Stephen Bre
 
 ## Build
 
-CD into `src/` and run `sudo ../build.sh`.
+Run `sudo ./build.sh`.
 
 ## Run
 
 To run the OS, you can download VM software.
-A pre-built ISO image is in the `src/out/` directory.
+A pre-built ISO image is in the `./out/` directory.
 
 ### Recommended:
 
@@ -21,7 +21,7 @@ A pre-built ISO image is in the `src/out/` directory.
 
 ### Running with VMWARE/Virtualbox
 
-To run with this, simply insert the iso image outputted in `src/out/`, and make sure to choose the `other` option.
+To run with this, simply insert the iso image outputted in `./out/`, and make sure to choose the `other` option.
 
 ### Running with qemu
 
@@ -29,7 +29,7 @@ Run with `qemu-system-x86_64 iso/MyOS.iso`.
 
 ## Source
 
-The source is in the `src/` Directory
+
 
 ## Contact Info
 

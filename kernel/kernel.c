@@ -56,9 +56,9 @@ void kernel_entry(struct multiboot *mboot_ptr)
 	print_string("Initialised Mouse Driver\n");
 	print_string("\n");
 	clearScreen();
-	string username_setup = "SquirrelOS";
-	file_make("username");
-	file_writes("username", username_setup);
+	// string username_setup = "SquirrelOS";
+	// file_make("username");
+	// file_writes("username", username_setup);
 	// SET USERNAME
 	// char *username = (char *)malloc(file_size("username"));
 	// int response = file_read("username", username);

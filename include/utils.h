@@ -31,7 +31,9 @@ struct block *freeList=(void*)memory;
 // void *MyMalloc(size_t noOfBytes);
 
 
-
+#define	EXIT_FAILURE	1
+#define	EXIT_SUCCESS	0
+#define	EXIT_CONTINUE	2
 #define KERNEL_MEMORY_OFFSET_START 0xffffff
 #define KERNEL_MEMORY_OFFSET_END	0xffffffff
 #define MEMORY_EMPTY 0x0

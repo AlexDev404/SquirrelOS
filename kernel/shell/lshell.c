@@ -38,7 +38,7 @@ int run(char **args);
 int lsh_man(char **args);
 char *prompt = "LSH> ";
 char os_name[] = "SquirrelOS";
-chat echostat[] = "on";
+char echostat[] = "on";
 
 /*
   Function Declarations for builtin shell commands:

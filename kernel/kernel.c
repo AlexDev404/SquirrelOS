@@ -55,8 +55,8 @@ void kernel_entry(struct multiboot *mboot_ptr)
 	mouse_init();
 	printf("Initialised Mouse Driver\n");
 	clearScreen();
-	print_string("\nWelcome to SquirrelOS!\nPlease enter a command\n");
-	print_string("Enter 'help' for commands\n\n\n");
+	printf("\nWelcome to SquirrelOS!\nPlease enter a command\n");
+	printf("Enter 'help' for commands\n\n\n");
 	lsh_loop();
 	panic("EXITED KERNEL");
 

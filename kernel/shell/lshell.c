@@ -38,6 +38,7 @@ int run(char **args);
 int lsh_man(char **args);
 char *prompt = "LSH> ";
 char os_name[] = "SquirrelOS";
+chat echostat[] = "on";
 
 /*
   Function Declarations for builtin shell commands:
@@ -172,9 +173,9 @@ int lsh_echo(char **args)
 
     // Check if we were fooled into printing out our name
 
-    if (args[1] == "\0")
+    if (args[1] == NULL)
     {
-        printf("\n");
+        printf("ECHO is %s.", echostat);
         return 1;
     }
 
@@ -182,13 +183,15 @@ int lsh_echo(char **args)
 
     if (strcmp(args[1], "off"))
     {
-        printf("ECHO is OFF");
+	echostat = "off";
+        printf("ECHO is %s.", echostat);
         prompt = "";
     }
 
     if (strcmp(args[1], "on"))
     {
-        printf("ECHO is ON");
+	echostat = "on";
+        printf("ECHO is %s.", echostat);
         prompt = "LSH> ";
     }
 

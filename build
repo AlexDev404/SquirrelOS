@@ -9,7 +9,7 @@
 
 # Set Build Dir Here!
 
-build_dir="build"
+build_dir="build2"
 out_dir="out"
 OS_NAME="MyOS"
 

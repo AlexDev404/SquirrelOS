@@ -3,6 +3,10 @@
  * The original cowsay program in C
  * By: Aaron
  * Started: June 22, 2012
+ * 
+ * Ported to SquirrelOS 
+ * By: Immanuel Garica
+ * Started: September 26, 2021
  *
  */
 /*
@@ -43,7 +47,7 @@ char eyes = 'o';
 char upperbubble = '\\';
 char lowerbubble = '\\';
 
-unsigned int counter;
+int counter;
 unsigned int argscharcount = 0;
 unsigned int nextarg;
 unsigned short skiparg;
@@ -51,62 +55,63 @@ unsigned short thought = 0;
 
 int ccowsay(char **argv)
 {
-    int argc = sizeof(argv);
-    printf("%d", argc);
+    int argc = strlen(argv);
+    int i = 0;
+    printf("ARGC INCLUDES:\n");
+    printf("%d Arguments\n", argc);
+    printf("ARGV INCLUDES:\n");
 
-    /*Handle Arguments*/
+    // Looks like I'll have to put this line in every application * sigh *
+    argv[strlen(argv)] = "\0";
+
+    for (int i = 0; argv[i] != "\0"; i++)
+    {
+        printf("%s, ", argv[i]);
+    }
+
+    /*Handle Arguments
     if (argc == 1)
     {
         displayhelp();
         return 2;
-    }
-    for (counter = 1; counter < argc; counter++)
+    }*/
+    for (int counter = 0; argv[counter] != "\0"; counter++)
     {
+        printf("ARGV: %s\n", argv[counter]);
+
         if (!strcmp(argv[counter], "-e") || !strcmp(argv[counter], "--eyes"))
         {
             nextarg = (counter + 1);
             if (strlen(argv[nextarg]) == 1)
             {
-                strcpy(&eyes, argv[nextarg]);
+                eyes = argv[counter];
             }
-            else
-            {
-                displayhelp();
-                return 2;
-            }
+            //  else
+            //  {
+            //      displayhelp();
+            //      return 2;
+            //  }
         }
-        else if (!strcmp(argv[counter], "-t") || !strcmp(argv[counter], "--thought"))
-        {
-            thought = 1;
-            strcpy(&upperbubble, "O");
-            strcpy(&lowerbubble, "o");
-        }
-        else if (!strcmp(argv[counter], "-h") || !strcmp(argv[counter], "--help"))
+        if (strcmp(argv[counter], "-h") || strcmp(argv[counter], "--help"))
         {
             displayhelp();
-            return 1;
         }
-        else if (!strcmp(argv[counter], "-l") || !strcmp(argv[counter], "--list"))
+        if (strcmp(argv[counter], "-l") || strcmp(argv[counter], "--list"))
         {
             displaycowlist();
-            return 1;
         }
     }
 
     /* Count characters in non-flag arguments */
-    for (counter = 1; counter < argc; counter++)
+    for (counter = 0; argv[counter] != "\0"; counter++)
     {
         skiparg = 0;
-        if (!strcmp(argv[counter], "-c") || !strcmp(argv[counter], "--cow") || !strcmp(argv[counter], "-e") || !strcmp(argv[counter], "--eyes"))
+        if (!strcmp(argv[counter], "-e") || !strcmp(argv[counter], "--eyes"))
         {
             skiparg = 1;
             counter++;
         }
-        else if (!strcmp(argv[counter], "-t") || !strcmp(argv[counter], "--thought"))
-        {
-            skiparg = 1;
-        }
-        else if (counter < argc && skiparg == 0)
+        else if (argv[counter] != "\0" && skiparg == 0)
         {
             argscharcount = (argscharcount + 1 + (strlen(argv[counter])));
         }
@@ -120,7 +125,7 @@ int ccowsay(char **argv)
 
     /* Display speech bubble */
     printf(" ");
-    for (counter = 1; counter <= argscharcount; counter++)
+    for (counter = 0; counter <= argscharcount; counter++)
     {
         printf("_");
     }
@@ -134,17 +139,13 @@ int ccowsay(char **argv)
         printf("\n( ");
     }
 
-    for (counter = 1; counter < argc; counter++)
+    for (counter = 0; argv[counter] != "\0"; counter++)
     {
         skiparg = 0;
-        if (!strcmp(argv[counter], "-c") || !strcmp(argv[counter], "--cow") || !strcmp(argv[counter], "-e") || !strcmp(argv[counter], "--eyes"))
+        if (!strcmp(argv[counter], "-e") || !strcmp(argv[counter], "--eyes"))
         {
             skiparg = 1;
             counter++;
-        }
-        else if (!strcmp(argv[counter], "-t") || !strcmp(argv[counter], "--thought"))
-        {
-            skiparg = 1;
         }
         else if (skiparg == 0)
         {
@@ -160,7 +161,7 @@ int ccowsay(char **argv)
     {
         printf(")\n ");
     }
-    for (counter = 1; counter <= argscharcount; counter++)
+    for (counter = 0; counter <= argscharcount; counter++)
     {
         printf("-");
     }
@@ -224,9 +225,8 @@ Usage:\n\
 Flags:\n\
     -h or --help    - Displays this help text\n\
     -l or --list    - List all cowfiles\n\
-    -c or --cow     - Specify cowfile\n\
     -e or --eyes    - Specify character used for the eyes. Must be ONE character!\n\
-    -t or --thought - Thought bubble\n");
+    ");
 }
 
 void printcow(void)

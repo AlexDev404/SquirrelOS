@@ -86,7 +86,7 @@ int run(char **args)
 {
     // DIRECT = ARGS[1] == NULL
     // NO-DIRECT = ARGS[1] == TRUE
-
+    
     if (strcmp(args[0], "run") && args[1] == NULL) // EXAMPLE: run (use arg0, direct = true)
     {
         print_string("\nEnter App to Run: ");
@@ -402,6 +402,8 @@ char **lsh_split_line(char *line)
         }
         token = strtok(NULL, LSH_TOK_DELIM);
     }
+    // Append ending to args
+
     tokens[strlen(tokens)] = "\0";
 
     /* 

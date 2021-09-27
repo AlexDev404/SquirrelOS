@@ -1,92 +1,127 @@
-# SQUIRRELOS BUILD SCRIPT v0.1
+# SQUIRRELOS BUILD SCRIPT v0.51
+# @updated_on: September 26, 2021 @ 1551 CST
+# @author: Immanuel Garcia
+# @desc: Builds SquirrelOS
+# @comment: Will be improved upon later
 
 # echo "argument1: $1"
 # echo "argument2: $2"
 
+# Set Build Dir Here!
+
+build_dir="build"
+out_dir="out"
+OS_NAME="MyOS"
 
 function compile {
+    
+    # Create Build Directory
+    mkdir $build_dir
+    
+    echo "Assembling Boot Files..."
     # BOOT
     # Assemble boot.s file
-    as --32 boot/boot.s -o boot.o
-    as --32 gdt/load_gdt.s -o load_gdt.o
-    as --32 idt/load_idt.s -o load_idt.o
+    as --32 boot/boot.s -o $build_dir/boot.o
+    as --32 gdt/load_gdt.s -o $build_dir/load_gdt.o
+    as --32 idt/load_idt.s -o $build_dir/load_idt.o
     
     
+    echo "Compiling Drivers..."
     # CPU
     
-    gcc -m32 -c cpu/cpuid/cpuid.c -o cpuid.o -std=gnu99 -ffreestanding -w -I.
+    gcc -m32 -c cpu/cpuid/cpuid.c -o $build_dir/cpuid.o -std=gnu99 -ffreestanding -w -I.
     
     # DRIVERS
-    gcc -m32 -c drivers/acpi/acpi.c -o acpi.o -std=gnu99 -ffreestanding -w -I.
-    gcc -m32 -c drivers/ata/ata.c -o ata.o -std=gnu99 -ffreestanding -w -I.
-    gcc -m32 -c drivers/keyboard/keyboard.c -o keyboard.o -std=gnu99 -ffreestanding -w -I.
-    gcc -m32 -c drivers/mouse/mouse.c -o mouse.o -std=gnu99 -ffreestanding -w -I.
-    gcc -m32 -c drivers/pci/pci.c -o pci.o -std=gnu99 -ffreestanding -w -I.
-    gcc -m32 -c drivers/ports/ports.c -o ports.o -std=gnu99 -ffreestanding -w -I.
-    gcc -m32 -c drivers/rtc/rtc.c -o rtc.o -std=gnu99 -ffreestanding -w -I.
-    gcc -m32 -c drivers/screen/screen.c -o screen.o -std=gnu99 -ffreestanding -w -I.
-    gcc -m32 -c drivers/serial/serial.c -o serial.o -std=gnu99 -ffreestanding -w -I.
-    gcc -m32 -c drivers/sound/pcspeaker/pcspeaker.c -o pcspeaker.o -std=gnu99 -ffreestanding -w -I.
-    gcc -m32 -c drivers/timer/timer.c -o timer.o -std=gnu99 -ffreestanding -w -I.
+    gcc -m32 -c drivers/acpi/acpi.c -o $build_dir/acpi.o -std=gnu99 -ffreestanding -w -I.
+    gcc -m32 -c drivers/ata/ata.c -o $build_dir/ata.o -std=gnu99 -ffreestanding -w -I.
+    gcc -m32 -c drivers/keyboard/keyboard.c -o $build_dir/keyboard.o -std=gnu99 -ffreestanding -w -I.
+    gcc -m32 -c drivers/mouse/mouse.c -o $build_dir/mouse.o -std=gnu99 -ffreestanding -w -I.
+    gcc -m32 -c drivers/pci/pci.c -o $build_dir/pci.o -std=gnu99 -ffreestanding -w -I.
+    gcc -m32 -c drivers/ports/ports.c -o $build_dir/ports.o -std=gnu99 -ffreestanding -w -I.
+    gcc -m32 -c drivers/rtc/rtc.c -o $build_dir/rtc.o -std=gnu99 -ffreestanding -w -I.
+    gcc -m32 -c drivers/screen/screen.c -o $build_dir/screen.o -std=gnu99 -ffreestanding -w -I.
+    gcc -m32 -c drivers/serial/serial.c -o $build_dir/serial.o -std=gnu99 -ffreestanding -w -I.
+    gcc -m32 -c drivers/sound/pcspeaker/pcspeaker.c -o $build_dir/pcspeaker.o -std=gnu99 -ffreestanding -w -I.
+    gcc -m32 -c drivers/timer/timer.c -o $build_dir/timer.o -std=gnu99 -ffreestanding -w -I.
     
     # FS
-    gcc -m32 -c fs/initrd/initrd.c -o initrd.o -std=gnu99 -ffreestanding -w -I.
-    gcc -m32 -c fs/fs.c -o fs.o -std=gnu99 -ffreestanding -I.
-    gcc -m32 -c fs/tar.c -o tar.o -std=gnu99 -ffreestanding -w -I.
-    gcc -m32 -c fs/vfs.c -o vfs.o -std=gnu99 -ffreestanding -w -I.
+    gcc -m32 -c fs/initrd/initrd.c -o $build_dir/initrd.o -std=gnu99 -ffreestanding -w -I.
+    gcc -m32 -c fs/fs.c -o $build_dir/fs.o -std=gnu99 -ffreestanding -I.
+    gcc -m32 -c fs/tar.c -o $build_dir/tar.o -std=gnu99 -ffreestanding -w -I.
+    gcc -m32 -c fs/vfs.c -o $build_dir/vfs.o -std=gnu99 -ffreestanding -w -I.
     
     # GDT
-    gcc -m32 -c gdt/gdt.c -o gdt.o -std=gnu99 -ffreestanding -w -I.
+    gcc -m32 -c gdt/gdt.c -o $build_dir/gdt.o -std=gnu99 -ffreestanding -w -I.
     
     # IDT
-    gcc -m32 -c idt/idt.c -o idt.o -std=gnu99 -ffreestanding -w -I.
-    gcc -m32 -c idt/isr.c -o isr.o -std=gnu99 -ffreestanding -I.
+    gcc -m32 -c idt/idt.c -o $build_dir/idt.o -std=gnu99 -ffreestanding -w -I.
+    gcc -m32 -c idt/isr.c -o $build_dir/isr.o -std=gnu99 -ffreestanding -I.
     
+    
+    echo "Compiling LibC Include Directories..."
     # INCLUDE
-    gcc -m32 -c include/math/math.c -o math.o -std=gnu99 -ffreestanding -w -I.
-    gcc -m32 -c include/utils.c -o utils.o -std=gnu99 -ffreestanding -w -I.
-    gcc -m32 -c include/printf.c -o printf.o -std=gnu99 -ffreestanding -w -I.
+    gcc -m32 -c include/math/math.c -o $build_dir/math.o -std=gnu99 -ffreestanding -w -I.
+    gcc -m32 -c include/utils.c -o $build_dir/utils.o -std=gnu99 -ffreestanding -w -I.
+    gcc -m32 -c include/printf.c -o $build_dir/printf.o -std=gnu99 -ffreestanding -w -I.
     
+    
+    echo "Compiling the kernel and its applications..."
     # KERNEL
     
     # KERNEL - APPLICATIONS
     
-    gcc -m32 -c kernel/apps/apps.c -o apps.o -std=gnu99 -ffreestanding -w -I.
-    gcc -m32 -c kernel/apps/cowsay/cowsay.c -o cowsay.o -std=gnu99 -ffreestanding -w -I.
-    gcc -m32 -c kernel/apps/textedit/textedit.c -o textedit.o -std=gnu99 -ffreestanding -w -I.
-    gcc -m32 -c kernel/apps/calculator/calculator.c -o calculator.o -std=gnu99 -ffreestanding -w -I.
-    gcc -m32 -c kernel/apps/serialapp/serialapp.c -o serialapp.o -std=gnu99 -ffreestanding -w -I.
-    gcc -m32 -c kernel/apps/slang/slang.c -o slang.o -std=gnu99 -ffreestanding -w -I.
-    gcc -m32 -c kernel/apps/man/man.c -o man.o -std=gnu99 -ffreestanding -w -I.
+    gcc -m32 -c kernel/apps/apps.c -o $build_dir/apps.o -std=gnu99 -ffreestanding -w -I.
+    gcc -m32 -c kernel/apps/cowsay/cowsay.c -o $build_dir/cowsay.o -std=gnu99 -ffreestanding -w -I.
+    gcc -m32 -c kernel/apps/textedit/textedit.c -o $build_dir/textedit.o -std=gnu99 -ffreestanding -w -I.
+    gcc -m32 -c kernel/apps/calculator/calculator.c -o $build_dir/calculator.o -std=gnu99 -ffreestanding -w -I.
+    gcc -m32 -c kernel/apps/serialapp/serialapp.c -o $build_dir/serialapp.o -std=gnu99 -ffreestanding -w -I.
+    gcc -m32 -c kernel/apps/slang/slang.c -o $build_dir/slang.o -std=gnu99 -ffreestanding -w -I.
+    gcc -m32 -c kernel/apps/man/man.c -o $build_dir/man.o -std=gnu99 -ffreestanding -w -I.
     
     # OLDSHELL
     # gcc -m32 -c kernel/shell.c -o shell.o -std=gnu99 -ffreestanding -w -I.
     
-    gcc -m32 -c kernel/pic/pic.c -o pic.o -std=gnu99 -ffreestanding -w -I.
-    gcc -m32 -c kernel/shell/lshell.c -o lshell.o -std=gnu99 -ffreestanding -w -I.
-    gcc -m32 -c kernel/panic.c -o panic.o -std=gnu99 -ffreestanding -w -I.
+    gcc -m32 -c kernel/pic/pic.c -o $build_dir/pic.o -std=gnu99 -ffreestanding -w -I.
+    gcc -m32 -c kernel/shell/lshell.c -o $build_dir/lshell.o -std=gnu99 -ffreestanding -w -I.
+    gcc -m32 -c kernel/panic.c -o $build_dir/panic.o -std=gnu99 -ffreestanding -w -I.
     
     # KERNEL ENTRY
     
-    gcc -m32 -c kernel/kernel.c -o kernel.o -std=gnu99 -ffreestanding -w -I.
+    gcc -m32 -c kernel/kernel.c -o $build_dir/kernel.o -std=gnu99 -ffreestanding -w -I.
     
-    ld -m elf_i386 -T boot/linker.ld kernel.o screen.o utils.o keyboard.o ports.o lshell.o apps.o man.o cowsay.o cpuid.o load_idt.o gdt.o idt.o isr.o vfs.o initrd.o serial.o panic.o pci.o rtc.o mouse.o pic.o ata.o fs.o acpi.o textedit.o math.o calculator.o serialapp.o slang.o tar.o printf.o pcspeaker.o timer.o boot.o load_gdt.o -o MyOS.bin -nostdlib --allow-multiple-definition
+    cd $build_dir
     
+    echo "Starting the linking of ALL object files..."
     
-    # Check MyOS.bin file is x86 multiboot file or not
-    grub-file --is-x86-multiboot MyOS.bin
+    ld -m elf_i386 -T ../boot/linker.ld kernel.o screen.o utils.o keyboard.o ports.o lshell.o apps.o man.o cowsay.o cpuid.o load_idt.o gdt.o idt.o isr.o vfs.o initrd.o serial.o panic.o pci.o rtc.o mouse.o pic.o ata.o fs.o acpi.o textedit.o math.o calculator.o serialapp.o slang.o tar.o printf.o pcspeaker.o timer.o boot.o load_gdt.o -o $OS_NAME.bin -nostdlib --allow-multiple-definition
+    
+    mv $OS_NAME.bin ../
+    cd ..
+    
+    echo "Verifying the Output BIN file ($OS_NAME.BIN)"
+    # Check $OS_NAME.bin file is x86 multiboot file or not
+    grub-file --is-x86-multiboot $OS_NAME.bin
     
 }
 
 function check {
     # Build The ISO Disk Image File
-    rm -r out
-    mkdir out
+    # Remove OutDir if it exists
+    if [ -d "$out_dir" ];
+    then
+        echo "Removing Already Existing Output Directory"
+        rm -r $out_dir
+        mkdir $out_dir
+    else
+        mkdir $out_dir
+    fi
+    
     mkdir -p boot/grubconf/boot/grub
     
-    cp MyOS.bin boot/grubconf/boot/MyOS.bin
+    echo "Building $OS_NAME..."
+    cp $OS_NAME.bin boot/grubconf/boot/$OS_NAME.bin
     cp boot/grub.cfg boot/grubconf/boot/grub/grub.cfg
-    grub-mkrescue -o out/MyOS.iso boot/grubconf
+    grub-mkrescue -o $out_dir/$OS_NAME.iso boot/grubconf
 }
 
 function cleanup {
@@ -94,14 +129,36 @@ function cleanup {
     # rm -rf isodir
     rm -rf *.o
     rm -rf *.bin
+    rm -r $build_dir
+    rm -r boot/grubconf
 }
 
 function cleanall {
     # Remove Files Created While Building Source
     # rm -rf isodir
+    numrem=0
+    
     rm -rf *.o
     rm -rf *.bin
-    rm -r out
+    
+    if [ -d "$out_dir" ];
+    then
+        rm -r $out_dir
+        let "numrem=numrem+1"
+    fi
+    
+    if [ -d "$build_dir" ];
+    then
+        rm -r $build_dir
+        let "numrem=numrem+1"
+    fi
+    
+    if [ -d "boot/grubconf" ];
+    then
+        rm -r boot/grubconf
+        let "numrem=numrem+1"
+    fi
+    echo "Removed a total of $numrem directories."
 }
 
 if [ "$1" = "clean" ]; then

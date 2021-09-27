@@ -5,10 +5,13 @@ int man(char **args)
 {
     int i;
     printf("NOT IMPLEMENTED\n");
-    for (i = 0; args[i] != "\0"; i++)
+
+    // Looks like I'll have to put this in every application * sigh *
+    args[strlen(args)] = "\0";
+
+    for (int i = 0; args[i] != "\0"; i++)
     {
         printf("%s, ", args[i]);
     }
-    printf("%d", i);
     return 1;
 }

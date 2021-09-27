@@ -17,7 +17,7 @@ typedef struct __attribute__((packed)) {
 } mem_header_t;
 
 
-char memory[20000];
+char memory[10000];
 
 struct block{
  size_t size; /*Carries the size of the block described by it*/

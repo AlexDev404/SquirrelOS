@@ -1,4 +1,4 @@
-# SquirrelOS - The successor of XeonOS
+# SquirrelOS
 
 <img src="https://raw.githubusercontent.com/AlexDev404/SquirrelOS/main/previewImg/CapturePreview4.PNG"/>
 A simple DOS like OS made in Assembly and C with a ported version of Stephen Brennan's [LSH](https://github.com/brenns10/lsh) Shell.

@@ -5,10 +5,6 @@ Licensed under MIT ( https://github.com/xing1357/SimpleOS/blob/main/LICENSE )
 */
 
 #include "screen.h"
-
-#define VGA_WIDTH 852
-#define VGA_HEIGHT 480
-
 int cursorX = 0, cursorY = 0;
 
 uint32 vga_index;
@@ -232,6 +228,17 @@ void print_string_colored(char *str, int color_code)
   // And finally, set back the old color..
 
   color = old_color;
+}
+
+void sw_color(int color_code)
+{
+ // Switch the color of the screen and clear it
+  color = color_code;
+}
+
+void move_cursor(int cur_x, int cur_y){
+	cursorX = cur_x;
+	cursorY = cur_y;
 }
 
 void print_binary(uint32 num)

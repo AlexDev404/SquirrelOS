@@ -10,6 +10,8 @@ Licensed under MIT ( https://github.com/xing1357/SimpleOS/blob/main/LICENSE )
 #include "include/utils.h"
 #include "drivers/ports/ports.h"
 
+#define VGA_WIDTH 852
+#define VGA_HEIGHT 480
 #define VGA_ADDRESS 0xb8000
 #define BUFSIZE 2200
 
@@ -53,6 +55,8 @@ void print_string(char *str);
 void print_int(int num);
 void clearScreen();
 void print_string_colored(char *str, int color_code);
+void sw_color(int color_code);
+void move_cursor(int cur_x, int cur_y);
 void print_binary(uint32 num);
 
 #endif

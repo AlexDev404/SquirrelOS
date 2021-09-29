@@ -171,6 +171,7 @@ int about(char **args)
 
 int lsh_clear(char **args)
 {
+    sw_color(0x0F); // Switch screen color to BLACK on WHITE text
     clearScreen();
 }
 
@@ -214,7 +215,8 @@ int lsh_echo(char **args)
     if (!strcmp(args[1], "on") && !strcmp(args[1], "off"))
     {
 
-        for (int i = 1; args[i] != "\0"; i++)
+	// printf("%d", strlen(args));
+        for (int i = 1; i != strlen(args); i++)
         {
             // Spit back what the user typed back onto the screen
             // printf("%s ", args[i]);

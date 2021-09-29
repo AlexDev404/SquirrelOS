@@ -22,6 +22,7 @@ Licensed under MIT ( https://github.com/xing1357/SimpleOS/blob/main/LICENSE )
 #include "slang/slang.h"
 #include "cowsay/cowsay.h"
 #include "man/man.h"
+#include "xgui/xgui.h"
 
 /************************************/
 
@@ -31,7 +32,8 @@ int (*builtin_appFunc[])(char **) = {
     &serialapp,
     &slang,
     &ccowsay,
-    &man};
+    &man,
+    &xgui};
 
 char *builtin_apps[] = {
     "textedit",
@@ -39,7 +41,8 @@ char *builtin_apps[] = {
     "serialapp",
     "slang",
     "ccowsay",
-    "man"};
+    "man",
+    "xgui"};
 
 int num_builtin_apps()
 {

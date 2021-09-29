@@ -13,8 +13,12 @@ static uint32 next_line_index = 1;
 
 // Test variables
 
-uint8 g_fore_color = LIGHT_GREY, g_back_color = BLACK;
-const uint8 sw = 80,sh = 25,sd = 2;
+uint8 g_fore_color = LIGHT_GREY;
+uint8 g_back_color = BLACK;
+
+const uint8 sw = 80;
+const uint8 sh = 25;
+const uint8 sd = 2;
 
 // Actual color for the screen
 int color = 0x07; // 07 = BG, TXT - 0 = BLACK; 7 = LIGHT_GREY
@@ -76,7 +80,6 @@ void init_vga(uint8 fore_color, uint8 back_color)
 void clearLine(uint8 from,uint8 to)
 {
         uint16 i = sw * from * sd;
-        string vidmem=(string)0xb8000;
         for(i;i<(sw*to*sd);i++)
         {
                 vidmem[(i / 2)*2 + 1 ] = color;
@@ -98,7 +101,6 @@ void updateCursor()
 
 void scrollUp(uint8 lineNumber)
 {
-        string vidmem = (string)0xb8000;
         uint16 i = 0;
         clearLine(0,lineNumber-1);                                            //updated
         for (i;i<sw*(sh-1)*2;i++)
@@ -146,8 +148,7 @@ void clearScreen()
 }
 
 void print_char(char c)
-{
-    string vidmem = (string) 0xb8000;     
+{  
     switch(c)
     {
         case (0x08):

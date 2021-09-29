@@ -45,6 +45,8 @@ enum vga_color
 #define BOX_SINGLELINE 1
 #define BOX_DOUBLELINE 2
 
+string vidmem=(string)0xb8000;
+
 uint16 vga_entry(unsigned char ch, uint8 fore_color, uint8 back_color);
 void clear_vga_buffer(uint16 **buffer, uint8 fore_color, uint8 back_color);
 void init_vga(uint8 fore_color, uint8 back_color);

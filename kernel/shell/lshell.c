@@ -171,7 +171,7 @@ int about(char **args)
 
 int lsh_clear(char **args)
 {
-    sw_color(0x0F); // Switch screen color to BLACK on WHITE text
+    sw_color(0x07); // Switch screen color to BLACK on LIGHT_GREY text
     clearScreen();
 }
 

@@ -3,9 +3,9 @@
 
 char *title = "The Quick";
 char *body = "Job hatted bearded";
-int bg_color = 0x7F;
+int bg_color = 0x3F;
 int in_bodyColor = 0x7F;
-int border_color = 0x4F;
+int border_color = 0x9F;
 
 int xgui(char **args)
 {
@@ -13,6 +13,8 @@ int xgui(char **args)
     clearScreen();
     printf("%s\n", title);
     genchar((strlen(title)+1), "_");
+    printf("\n");
+    genchar((strlen(title)+1)*2, "_");
     // move_cursor(VGA_WIDTH/2, VGA_HEIGHT/2);
 
 // TOP    

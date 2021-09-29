@@ -19,7 +19,6 @@
 #include "drivers/acpi/acpi.h"
 #include "fs/tar.h"
 #include "include/printf.h"
-#include "fonts/font.h"
 #include "drivers/timer/timer.h"
 
 void kernel_entry(struct multiboot *mboot_ptr)
@@ -27,14 +26,14 @@ void kernel_entry(struct multiboot *mboot_ptr)
 	uint32 initrd_location = *((uint32 *)mboot_ptr->mods_addr);
 	init_vga(LIGHT_GREY, BLACK); // INIT VGA LIGHT_GREY ON BLACK
 	init_gdt();
-	printf("GDT Initialised\n");
+	printf("GDT Initialized\n");
 	beep();
 	init_idt();
-	printf("IDT Initialised\n");
+	printf("IDT Initialized\n");
 	serial_init();
-	printf("Serial Driver Initialised\n");
+	printf("Serial Driver Initialized\n");
 	pci_init();
-	printf("PCI Driver Initialised\n");
+	printf("PCI Driver Initialized\n");
 	init_acpi();
 	printf("Initialised ACPI\n");
 	fs_root = initialise_initrd(initrd_location);
@@ -51,9 +50,9 @@ void kernel_entry(struct multiboot *mboot_ptr)
 	print_int(tarfound);
 	printf("\n");
 	fsinit();
-	printf("Initialised the Filesystem\n");
+	printf("Initialized the Filesystem\n");
 	mouse_init();
-	printf("Initialised Mouse Driver\n");
+	printf("Initialized Mouse Driver\n");
 	clearScreen();
 	printf("\nWelcome to SquirrelOS!\nPlease enter a command\n");
 	printf("Enter 'help' for commands\n\n\n");

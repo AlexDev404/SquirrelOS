@@ -64,7 +64,17 @@ function compile {
     gcc -m32 -c include/utils.c -o $build_dir/utils.o -std=gnu99 -ffreestanding -w -I.
     gcc -m32 -c include/printf.c -o $build_dir/printf.o -std=gnu99 -ffreestanding -w -I.
     
-    
+    # echo "Compiling the Experimental PSF Font Driver..."
+
+    # CONVERT PSF FILE TO ELF (AN UGLY BUG FORCES ME TO HAVE TO CD ALL THE WAY INTO THE DIRECTORY - DUMP THE OBJECT, AND CD BACK OUT AGAIN WHILE MOVING THE FILE) - CURRENTLY DISABLED
+    # cd kernel/fonts    
+    # objcopy -O elf32-i386 -B i386 -I binary font.psf font.o
+    # mv font.o ../../$build_dir/font.o
+    # cd ../../
+
+    # COMPILE FONT DRIVER
+    # gcc -m32 -c kernel/fonts/fontdriver/fontdriver.c -o $build_dir/fontdriver.o -std=gnu99 -ffreestanding -w -I.
+
     echo "Compiling the kernel and its applications..."
     # KERNEL
     

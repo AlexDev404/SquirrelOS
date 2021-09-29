@@ -1,3 +1,14 @@
+/* LSH v0.0.25-alpha
+ * Implementation by Immanuel Garcia
+ * Originally created by Stephen Brennan
+ * 
+ * TODO:
+ * -----
+ * Add blobbing
+ * Add Forking
+ * Clean-up code
+ */
+
 #include "lshell.h"
 #include "cpu/cpuid/cpuid.h"
 #include "kernel/apps/apps.h"
@@ -39,6 +50,7 @@ int lsh_man(char **args);
 char *prompt = "LSH> ";
 char os_name[] = "SquirrelOS";
 char *echostat = "on";
+char *version = "v0.0.25-alpha";
 
 /*
   Function Declarations for builtin shell commands:
@@ -152,15 +164,14 @@ int run(char **args)
 
 int about(char **args)
 {
-    printf("%s v0.0.1", os_name);
-    print_string("\nBy Immanuel Garcia\n");
+    printf("%s v%s", os_name, version);
+    print_string("\nBy Immanuel Garcia\n\n");
     return 1;
 }
 
 int lsh_clear(char **args)
 {
     clearScreen();
-    init_vga(GREEN, BLACK);
 }
 
 int lsh_echo(char **args)
@@ -175,7 +186,7 @@ int lsh_echo(char **args)
 
     if (args[1] == NULL)
     {
-        printf("ECHO is %s.", echostat);
+        printf("ECHO is %s.\n\n", echostat);
         return 1;
     }
 
@@ -184,31 +195,37 @@ int lsh_echo(char **args)
     if (strcmp(args[1], "off"))
     {
 	echostat = "off";
-        printf("ECHO is %s.", echostat);
+        // printf("ECHO is %s.", echostat);
         prompt = "";
+	return 1;
     }
 
     if (strcmp(args[1], "on"))
     {
 	echostat = "on";
-        printf("ECHO is %s.", echostat);
+        // printf("ECHO is %s.", echostat);
+	printf("\n");
         prompt = "LSH> ";
+	return 1;
     }
 
     // Loop through all the args that were typed
 
     if (!strcmp(args[1], "on") && !strcmp(args[1], "off"))
     {
+
         for (int i = 1; args[i] != "\0"; i++)
         {
             // Spit back what the user typed back onto the screen
-            printf("%s ", args[i]);
+            // printf("%s ", args[i]);
+            print_string_colored(args[i], 0x2F); // GREEN background on WHITE text
+	    printf(" "); // space
         }
     }
 
     // Print a new line after execution to make way for the terminal
 
-    printf("\n");
+    printf("\n\n");
     return 1;
 }
 

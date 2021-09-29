@@ -1,5 +1,6 @@
 /*
 Copyright 2021 Harvey Xing 
+Improved upon for SquirrelOS by Immanuel Garcia
 Licensed under MIT ( https://github.com/xing1357/SimpleOS/blob/main/LICENSE )
 */
 
@@ -13,9 +14,14 @@ int cursorX = 0, cursorY = 0;
 uint32 vga_index;
 uint16 cursor_pos = 0, cursor_next_line_index = 1;
 static uint32 next_line_index = 1;
-uint8 g_fore_color = WHITE, g_back_color = BLACK;
+
+// Test variables
+
+uint8 g_fore_color = LIGHT_GREY, g_back_color = BLACK;
 const uint8 sw = 80,sh = 25,sd = 2;
-int color = 0x0f;
+
+// Actual color for the screen
+int color = 0x07; // 07 = BG, TXT - 0 = BLACK; 7 = LIGHT_GREY
 
 int digit_ascii_codes[10] = {0x30, 0x31, 0x32, 0x33, 0x34, 0x35, 0x36, 0x37, 0x38, 0x39};
 
@@ -67,7 +73,8 @@ void init_vga(uint8 fore_color, uint8 back_color)
   clear_vga_buffer(&vga_buffer, fore_color, back_color);
   g_fore_color = fore_color;
   g_back_color = back_color;
-  enable_cursor(0, 0);
+//  enable_cursor(0, 0);
+  disable_cursor();
 }
 
 void clearLine(uint8 from,uint8 to)
@@ -76,7 +83,7 @@ void clearLine(uint8 from,uint8 to)
         string vidmem=(string)0xb8000;
         for(i;i<(sw*to*sd);i++)
         {
-                vidmem[(i / 2)*2 + 1 ] = color ;
+                vidmem[(i / 2)*2 + 1 ] = color;
                 vidmem[(i / 2)*2 ] = 0;
         }
 }
@@ -201,20 +208,30 @@ void print_int(int num)
   print_string(str_num);
 }
 
-void print_string_colored(char *str, uint8 fore_color, uint8 back_color)
+
+// The below function contains some bugs. Use carefully.
+
+void print_string_colored(char *str, int color_code)
 {
   uint32 index = 0;
-  uint8 fc, bc;
-  fc = g_fore_color;
-  bc = g_back_color;
-  g_fore_color = fore_color;
-  g_back_color = back_color;
+
+  // Keep a backup of the last saved color; We'll need it later.
+
+  int old_color;
+  old_color = color;
+  
+  // Let's start by setting the new color
+  color = color_code;
+  
+  // Print out the string...
+
   while(str[index]){
     print_char(str[index]);
     index++;
   }
-  g_fore_color = fc;
-  g_back_color = bc;
+  // And finally, set back the old color..
+
+  color = old_color;
 }
 
 void print_binary(uint32 num)

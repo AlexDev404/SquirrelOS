@@ -52,7 +52,7 @@ void print_char(char ch);
 void print_string(char *str);
 void print_int(int num);
 void clearScreen();
-void print_string_colored(char *str, uint8 fore_color, uint8 back_color);
+void print_string_colored(char *str, int color_code);
 void print_binary(uint32 num);
 
 #endif

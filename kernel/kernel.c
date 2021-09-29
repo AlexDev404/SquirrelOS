@@ -25,14 +25,14 @@
 void kernel_entry(struct multiboot *mboot_ptr)
 {
 	uint32 initrd_location = *((uint32 *)mboot_ptr->mods_addr);
-	init_vga(WHITE, BLACK);
+	init_vga(LIGHT_GREY, BLACK); // INIT VGA LIGHT_GREY ON BLACK
 	init_gdt();
 	printf("GDT Initialised\n");
 	beep();
 	init_idt();
 	printf("IDT Initialised\n");
 	serial_init();
-	printf("Serial  Driver Initialised\n");
+	printf("Serial Driver Initialised\n");
 	pci_init();
 	printf("PCI Driver Initialised\n");
 	init_acpi();

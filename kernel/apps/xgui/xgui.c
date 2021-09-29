@@ -2,19 +2,22 @@
 #include "../apps.h"
 
 char *title = "The Quick";
-char *body = "Job hatted bearded man";
+char *body = "Job hatted bearded";
+int bg_color = 0x7F;
+int in_bodyColor = 0x7F;
+int border_color = 0x4F;
 
 int xgui(char **args)
 {
-    sw_color(0x1F);
+    sw_color(bg_color);
     clearScreen();
     printf("%s\n", title);
-    genchar(strlen(title), "_");
+    genchar((strlen(title)+1), "_");
     // move_cursor(VGA_WIDTH/2, VGA_HEIGHT/2);
 
 // TOP    
     move_cursor(20, 10);
-    sw_color(0x4F); // 0xbg,fg
+    sw_color(border_color); // 0xbg,fg
     genchar((strlen(title) + strlen(body))*2, " ");
 
 
@@ -27,11 +30,11 @@ int xgui(char **args)
 // BODY
     move_cursor(20, 12);
     printf(" ");
-    sw_color(0x7F);
+    sw_color(in_bodyColor);
     genchar((strlen(title) + (strlen(body)/2))-1, " ");
     printf("%s", body);
     genchar((strlen(title) + (strlen(body)/2))-1, " ");
-    sw_color(0x4F); // 0xbg,fg
+    sw_color(border_color); // 0xbg,fg
     printf(" ");
 
 // BOTTOM

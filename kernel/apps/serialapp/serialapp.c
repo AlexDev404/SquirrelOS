@@ -42,7 +42,7 @@ void promptSerial()
         clearScreen();
         return 1;
     }
-    else if (buffer == NULL)
+    else if (buffer == "")
     {
         promptSerial();
     }

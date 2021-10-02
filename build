@@ -88,6 +88,7 @@ function compile {
     gcc -m32 -c kernel/apps/slang/slang.c -o $build_dir/slang.o -std=gnu99 -ffreestanding -w -I.
     gcc -m32 -c kernel/apps/man/man.c -o $build_dir/man.o -std=gnu99 -ffreestanding -w -I.
     gcc -m32 -c kernel/apps/xgui/xgui.c -o $build_dir/xgui.o -std=gnu99 -ffreestanding -w -I.
+    gcc -m32 -c kernel/apps/xander/xander.c -o $build_dir/xander.o -std=gnu99 -ffreestanding -w -I.
     
     # OLDSHELL
     # gcc -m32 -c kernel/shell.c -o shell.o -std=gnu99 -ffreestanding -w -I.
@@ -104,7 +105,7 @@ function compile {
     
     echo "Starting the linking of ALL object files..."
     
-    ld -m elf_i386 -T ../boot/linker.ld kernel.o screen.o utils.o keyboard.o ports.o lshell.o apps.o man.o xgui.o cowsay.o cpuid.o load_idt.o gdt.o idt.o isr.o vfs.o initrd.o serial.o panic.o pci.o rtc.o mouse.o pic.o ata.o fs.o acpi.o textedit.o math.o calculator.o serialapp.o slang.o tar.o printf.o pcspeaker.o timer.o boot.o load_gdt.o -o $OS_NAME.bin -nostdlib --allow-multiple-definition
+    ld -m elf_i386 -T ../boot/linker.ld kernel.o screen.o utils.o keyboard.o ports.o lshell.o apps.o man.o xgui.o xander.o cowsay.o cpuid.o load_idt.o gdt.o idt.o isr.o vfs.o initrd.o serial.o panic.o pci.o rtc.o mouse.o pic.o ata.o fs.o acpi.o textedit.o math.o calculator.o serialapp.o slang.o tar.o printf.o pcspeaker.o timer.o boot.o load_gdt.o -o $OS_NAME.bin -nostdlib --allow-multiple-definition
     
     mv $OS_NAME.bin ../
     cd ..

@@ -23,6 +23,9 @@ Licensed under MIT ( https://github.com/xing1357/SimpleOS/blob/main/LICENSE )
 #include "cowsay/cowsay.h"
 #include "man/man.h"
 #include "xgui/xgui.h"
+#include "xander/xander.h"
+
+int VGA_LINE = (VGA_WIDTH / 10) - 5;
 
 /************************************/
 
@@ -33,7 +36,8 @@ int (*builtin_appFunc[])(char **) = {
     &slang,
     &ccowsay,
     &man,
-    &xgui};
+    &xgui,
+    &xander};
 
 char *builtin_apps[] = {
     "textedit",
@@ -42,7 +46,8 @@ char *builtin_apps[] = {
     "slang",
     "ccowsay",
     "man",
-    "xgui"};
+    "xgui",
+    "xander"};
 
 int num_builtin_apps()
 {

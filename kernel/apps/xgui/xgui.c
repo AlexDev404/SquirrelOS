@@ -1,57 +1,51 @@
 #include "xgui.h"
 #include "../apps.h"
 
-char *title = "The Quick";
-char *body = "Job hatted bearded";
+char *title = "The Quick Man";
+char *formTitle = "The Quick Brown Fox";
+char *body = " The Quick Brown Fox Jumps Over The"; // 38 Chars MAX
 int bg_color = 0x3F;
 int in_bodyColor = 0x7F;
-int border_color = 0x9F;
+int border_color = 0x1F;
 
 int xgui(char **args)
 {
     sw_color(bg_color);
     clearScreen();
-    printf("%s\n", title);
-    genchar((strlen(title)+1), "_");
-    printf("\n");
-    genchar((strlen(title)+1)*2, "_");
-    // move_cursor(VGA_WIDTH/2, VGA_HEIGHT/2);
+    sw_color(0x5F);
+    centerText(title);
+    sw_color(bg_color);
 
-// TOP    
-    move_cursor(20, 10);
-    sw_color(border_color); // 0xbg,fg
-    genchar((strlen(title) + strlen(body))*2, " ");
+    // TOP
+    move_cursor(0, 10);
+    centerForm(" ", border_color, border_color, bg_color, false);
 
+    // TITLE
+    move_cursor(0, 11);
+    centerForm(formTitle, border_color, border_color, bg_color, false);
 
-// TITLE    
-    move_cursor(20, 11);
-    genchar((strlen(title)/2) + strlen(body), " ");
-    printf("%s ", title);
-    genchar((strlen(title)/2) + strlen(body), " ");
+    // BODY PADDING (TOP)
+    move_cursor(0, 12);
+    centerForm(" ", border_color, in_bodyColor, bg_color, true);
 
-// BODY
-    move_cursor(20, 12);
-    printf(" ");
+    // BODY
+    move_cursor(0, 13);
     sw_color(in_bodyColor);
-    genchar((strlen(title) + (strlen(body)/2))-1, " ");
-    printf("%s", body);
-    genchar((strlen(title) + (strlen(body)/2))-1, " ");
-    sw_color(border_color); // 0xbg,fg
-    printf(" ");
+    centerForm(body, border_color, in_bodyColor, bg_color, true);
 
-// BOTTOM
-    move_cursor(20, 13);
-    genchar((strlen(title) + strlen(body))*2, " ");
-    move_cursor(0, 20);
+    // BODY2
+    move_cursor(0, 14);
+    sw_color(in_bodyColor);
+    centerForm("Lazy Dog", border_color, in_bodyColor, bg_color, true);
+
+    // BODY PADDING (BOTTOM)
+    move_cursor(0, 15);
+    centerForm(" ", border_color, in_bodyColor, bg_color, true);
+
+    // BOTTOM
+    move_cursor(0, 16);
+    centerForm(" ", border_color, border_color, bg_color, false);
     return 1;
-}
-
-void genchar(int len, char *character){
-	int i = 0;
-	while(i < len){
-		printf(character);
-		i++;
-}
 }
 
 /*

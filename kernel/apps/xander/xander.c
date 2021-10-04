@@ -1,6 +1,6 @@
 /*
  *
- * LibXander v0.0.5A
+ * @name: LibXander v0.0.5A
  * @author: Immanuel Garcia
  * @desc: An NCurses-like Text-GUI Framework for SquirrelOS
  * @license: GPL v2.0

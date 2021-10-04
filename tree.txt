@@ -3,6 +3,7 @@
 |-- ISALNUM_TEST.txt
 |-- LICENSE
 |-- OLDFILES
+|   |-- kernel.c
 |   |-- shell.c
 |   `-- shell.h
 |-- README.md
@@ -10,13 +11,8 @@
 |-- boot
 |   |-- boot.s
 |   |-- grub.cfg
-|   |-- grubconf
-|   |   `-- boot
-|   |       |-- MyOS.bin
-|   |       `-- grub
-|   |           `-- grub.cfg
 |   `-- linker.ld
-|-- build.sh
+|-- build
 |-- cpu
 |   `-- cpuid
 |       |-- cpuid.c
@@ -78,6 +74,9 @@
 |   |-- isr.h
 |   `-- load_idt.s
 |-- include
+|   |-- exit.c
+|   |-- exit.h
+|   |-- limits.h
 |   |-- math
 |   |   |-- math.c
 |   |   `-- math.h
@@ -88,9 +87,6 @@
 |   |   `-- types.h
 |   |-- utils.c
 |   `-- utils.h
-|-- isodir
-|   `-- boot
-|       `-- grub\r
 |-- kernel
 |   |-- apps
 |   |   |-- apps.c
@@ -110,11 +106,45 @@
 |   |   |-- slang
 |   |   |   |-- slang.c
 |   |   |   `-- slang.h
-|   |   `-- textedit
-|   |       |-- textedit.c
-|   |       `-- textedit.h
+|   |   |-- textedit
+|   |   |   |-- textedit.c
+|   |   |   `-- textedit.h
+|   |   |-- xander
+|   |   |   |-- xander.c
+|   |   |   `-- xander.h
+|   |   `-- xgui
+|   |       |-- xgui.c
+|   |       `-- xgui.h
 |   |-- fonts
-|   |   `-- font.h
+|   |   |-- ChunkyMonkey
+|   |   |   |-- Atari8
+|   |   |   |   `-- Chunky\ Monkey.fnt
+|   |   |   |-- BBC
+|   |   |   |   |-- Chunky\ Monkey.bbc
+|   |   |   |   `-- Preview-DFS.ssd
+|   |   |   |-- C64
+|   |   |   |   |-- Chunky\ Monkey.bin
+|   |   |   |   |-- Chunky\ Monkey.both.64c
+|   |   |   |   `-- Chunky\ Monkey.upper.64c
+|   |   |   |-- Chunky\ Monkey.png
+|   |   |   |-- PC
+|   |   |   |   |-- Chunky\ Monkey.bdf
+|   |   |   |   |-- Chunky\ Monkey.psf
+|   |   |   |   |-- Chunky\ Monkey.ttf
+|   |   |   |   |-- Chunky\ Monkey.woff
+|   |   |   |   |-- Chunky\ Monkey.woff2
+|   |   |   |   `-- font.o
+|   |   |   |-- README.md
+|   |   |   `-- Spectrum
+|   |   |       |-- Chunky\ Monkey.ch8
+|   |   |       |-- Chunky\ Monkey.fzx
+|   |   |       |-- Chunky\ Monkey.tap
+|   |   |       `-- Chunky\ Monkey.z80.asm
+|   |   |-- font.h
+|   |   |-- fontdriver
+|   |   |   |-- fontdriver.c
+|   |   |   `-- fontdriver.h
+|   |   `-- ibmfont.h
 |   |-- kernel.c
 |   |-- multiboot.h
 |   |-- panic.c
@@ -135,5 +165,5 @@
 |   `-- placeholder
 `-- tree.txt
 
-43 directories, 91 files
+46 directories, 118 files
 ```

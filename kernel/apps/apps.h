@@ -7,43 +7,34 @@ Licensed under MIT ( https://github.com/xing1357/SimpleOS/blob/main/LICENSE )
 #define APPS_H
 
 #include "drivers/screen/screen.h"
-#include "fs/fs.h"
 #include "include/types/types.h"
 #include "include/math/math.h"
 #include "drivers/keyboard/keyboard.h"
-#include "include/utils.h"
+#include "include/memory/memory.h"
 
 // INCLUDE APPS BELOW THIS LINE HERE!
 // MAKE SURE TO EDIT BUILD.SH AFTER ADDING!!!
 
-#include "textedit/textedit.h"
 #include "calculator/calculator.h"
-#include "serialapp/serialapp.h"
-#include "slang/slang.h"
 #include "cowsay/cowsay.h"
 #include "man/man.h"
 #include "xgui/xgui.h"
 #include "xander/xander.h"
+#include "../../include/string/string.h"
 
 int VGA_LINE = (VGA_WIDTH / 10) - 5;
 
 /************************************/
 
 int (*builtin_appFunc[])(char **) = {
-    &textedit,
     &calculator,
-    &serialapp,
-    &slang,
     &ccowsay,
     &man,
     &xgui,
     &xander};
 
 char *builtin_apps[] = {
-    "textedit",
     "calculator",
-    "serialapp",
-    "slang",
     "ccowsay",
     "man",
     "xgui",

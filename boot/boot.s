@@ -29,7 +29,7 @@ _start:
 	mov $stackTop, %esp
 
   # call the kernel main source
-	call kernel_entry
+	call kmain
 
 	cli
 

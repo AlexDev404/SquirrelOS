@@ -9,7 +9,7 @@ Licensed under MIT ( https://github.com/xing1357/SimpleOS/blob/main/LICENSE )
 int getfirstNumber()
 {
     print_string("\nEnter First Number: ");
-    string num1 = readStr();
+    string num1 = scanf();
     int numb1 = str_to_int(num1);
     kfree(num1);
     return numb1;
@@ -18,7 +18,7 @@ int getfirstNumber()
 int getsecondNumber()
 {
     print_string("\nEnter Second Number: ");
-    string num2 = readStr();
+    string num2 = scanf();
     int numb2 = str_to_int(num2);
     kfree(num2);
     return numb2;
@@ -28,7 +28,7 @@ void runAgain()
 {
     print_string("Would you like to use Calculator Again?\n");
     print_string("No. 0\nYes. 1\n");
-    string result = readStr();
+    string result = scanf();
 
     if (strcmp(result, "0"))
     {
@@ -50,7 +50,7 @@ void calculator()
     print_string("Calculator\n");
     print_string("1. Addition\n2. Subtraction\n3. Multiplication\n4. Division\n5. Power\n");
     print_string("Enter Operation Of Your Choice: ");
-    string op = readStr();
+    string op = scanf();
     if (strcmp(op, "1"))
     {
         int num1 = getfirstNumber();

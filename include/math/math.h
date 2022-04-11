@@ -6,11 +6,15 @@ Licensed under MIT ( https://github.com/xing1357/SimpleOS/blob/main/LICENSE )
 #ifndef MATH_H
 #define MATH_H
 
+#include "limits.h"
+#include "../types/types.h"
+
 int add(int num1, int num2);
 int max(int num1, int num2);
 int sub(int num1, int num2);
 int mult(int num1, int num2);
 int div(int num1, int num2);
 int pow(int base, int power);
+double floor(double num);
 
 #endif

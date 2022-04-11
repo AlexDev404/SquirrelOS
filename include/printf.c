@@ -7,10 +7,9 @@ Licensed under MIT ( https://github.com/xing1357/SimpleOS/blob/main/LICENSE )
 #include "stdarg.h"
 #include "drivers/screen/screen.h"
 
-
 int vprintf(const char *fmt, va_list ap)
 {
-	const char *hex = "0123456789abcdef";
+	const char *hex = "0123456789ABCDEF";
 	char buf[11];
 	char *s;
 	unsigned u;

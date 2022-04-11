@@ -6,7 +6,7 @@ char *formTitle = "The Quick Brown Fox";
 char *body = " The Quick Brown Fox Jumps Over"; // 38 Chars MAX
 int bg_color = 0x3F;
 int in_bodyColor = 0x7F;
-int border_color = 0x1F;
+int border_color = 0x9F;
 
 int xgui(char **args)
 {

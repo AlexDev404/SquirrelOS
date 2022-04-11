@@ -78,6 +78,14 @@
 #   define ULONG_MAX        4294967295UL
 #  endif
 
+/* Minimum and maximum values a `signed long long int' can hold.  */
+#   define LLONG_MAX        9223372036854775807LL
+#   define LLONG_MIN        (-LLONG_MAX - 1LL)
+
+/* Maximum value an `unsigned long long int' can hold.  (Minimum is 0.)  */
+#   define ULLONG_MAX        18446744073709551615ULL
+
+
 # ifndef CHAR_WIDTH
 #  define CHAR_WIDTH 8
 # endif

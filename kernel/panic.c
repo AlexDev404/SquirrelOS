@@ -4,6 +4,7 @@ Licensed under MIT ( https://github.com/xing1357/SimpleOS/blob/main/LICENSE )
 */
 
 #include "panic.h"
+#include "drivers/screen/screen.h"
 #include "apps/apps.h"
 
 char *panic_title = "KERNEL PANIC";
@@ -18,6 +19,7 @@ void panic(char *str)
 	asm volatile("hlt");
 }
 
+ 
 int panic_xander(char *text)
 {
 	sw_color(panic_color_bg);
@@ -31,6 +33,7 @@ int panic_xander(char *text)
 	move_cursor(0, 11);
 	centerText(text);
 }
+
 
 /*
  * EXPECTED RESULT

@@ -22,59 +22,27 @@ function compile {
     # BOOT
     # Assemble boot.s file
     as --32 boot/boot.s -o $build_dir/boot.o
-    as --32 gdt/load_gdt.s -o $build_dir/load_gdt.o
-    as --32 idt/load_idt.s -o $build_dir/load_idt.o
     
     
     echo "Compiling Drivers..."
-    # CPU
     
-    gcc -m32 -c cpu/cpuid/cpuid.c -o $build_dir/cpuid.o -std=gnu99 -ffreestanding -w -I.
-    
-    # DRIVERS
-    gcc -m32 -c drivers/acpi/acpi.c -o $build_dir/acpi.o -std=gnu99 -ffreestanding -w -I.
-    gcc -m32 -c drivers/ata/ata.c -o $build_dir/ata.o -std=gnu99 -ffreestanding -w -I.
     gcc -m32 -c drivers/keyboard/keyboard.c -o $build_dir/keyboard.o -std=gnu99 -ffreestanding -w -I.
-    gcc -m32 -c drivers/mouse/mouse.c -o $build_dir/mouse.o -std=gnu99 -ffreestanding -w -I.
-    gcc -m32 -c drivers/pci/pci.c -o $build_dir/pci.o -std=gnu99 -ffreestanding -w -I.
     gcc -m32 -c drivers/ports/ports.c -o $build_dir/ports.o -std=gnu99 -ffreestanding -w -I.
-    gcc -m32 -c drivers/rtc/rtc.c -o $build_dir/rtc.o -std=gnu99 -ffreestanding -w -I.
     gcc -m32 -c drivers/screen/screen.c -o $build_dir/screen.o -std=gnu99 -ffreestanding -w -I.
-    gcc -m32 -c drivers/serial/serial.c -o $build_dir/serial.o -std=gnu99 -ffreestanding -w -I.
-    gcc -m32 -c drivers/sound/pcspeaker/pcspeaker.c -o $build_dir/pcspeaker.o -std=gnu99 -ffreestanding -w -I.
-    gcc -m32 -c drivers/timer/timer.c -o $build_dir/timer.o -std=gnu99 -ffreestanding -w -I.
-    
-    # FS
-    gcc -m32 -c fs/initrd/initrd.c -o $build_dir/initrd.o -std=gnu99 -ffreestanding -w -I.
-    gcc -m32 -c fs/fs.c -o $build_dir/fs.o -std=gnu99 -ffreestanding -I.
-    gcc -m32 -c fs/tar.c -o $build_dir/tar.o -std=gnu99 -ffreestanding -w -I.
-    gcc -m32 -c fs/vfs.c -o $build_dir/vfs.o -std=gnu99 -ffreestanding -w -I.
-    
-    # GDT
-    gcc -m32 -c gdt/gdt.c -o $build_dir/gdt.o -std=gnu99 -ffreestanding -w -I.
-    
-    # IDT
-    gcc -m32 -c idt/idt.c -o $build_dir/idt.o -std=gnu99 -ffreestanding -w -I.
-    gcc -m32 -c idt/isr.c -o $build_dir/isr.o -std=gnu99 -ffreestanding -I.
+    gcc -m32 -c drivers/rtc/rtc.c -o $build_dir/rtc.o -std=gnu99 -ffreestanding -w -I.
     
     
     echo "Compiling LibC Include Directories..."
     # INCLUDE
+    gcc -m32 -c include/assert/assert.c -o $build_dir/assert.o -std=gnu99 -ffreestanding -w -I.
     gcc -m32 -c include/math/math.c -o $build_dir/math.o -std=gnu99 -ffreestanding -w -I.
-    gcc -m32 -c include/utils.c -o $build_dir/utils.o -std=gnu99 -ffreestanding -w -I.
+    gcc -m32 -c include/memory/memory.c -o $build_dir/memory.o -std=gnu99 -ffreestanding -w -I.
+    gcc -m32 -c include/string/string.c -o $build_dir/string.o -std=gnu99 -ffreestanding -w -I.
+    gcc -m32 -c include/exit.c -o $build_dir/exit.o -std=gnu99 -ffreestanding -w -I.
     gcc -m32 -c include/printf.c -o $build_dir/printf.o -std=gnu99 -ffreestanding -w -I.
+    gcc -m32 -c include/utils.c -o $build_dir/utils.o -std=gnu99 -ffreestanding -w -I.
     
-    # echo "Compiling the Experimental PSF Font Driver..."
-
-    # CONVERT PSF FILE TO ELF (AN UGLY BUG FORCES ME TO HAVE TO CD ALL THE WAY INTO THE DIRECTORY - DUMP THE OBJECT, AND CD BACK OUT AGAIN WHILE MOVING THE FILE) - CURRENTLY DISABLED
-    # cd kernel/fonts    
-    # objcopy -O elf32-i386 -B i386 -I binary font.psf font.o
-    # mv font.o ../../$build_dir/font.o
-    # cd ../../
-
-    # COMPILE FONT DRIVER
-    # gcc -m32 -c kernel/fonts/fontdriver/fontdriver.c -o $build_dir/fontdriver.o -std=gnu99 -ffreestanding -w -I.
-
+    
     echo "Compiling the kernel and its applications..."
     # KERNEL
     
@@ -82,10 +50,7 @@ function compile {
     
     gcc -m32 -c kernel/apps/apps.c -o $build_dir/apps.o -std=gnu99 -ffreestanding -w -I.
     gcc -m32 -c kernel/apps/cowsay/cowsay.c -o $build_dir/cowsay.o -std=gnu99 -ffreestanding -w -I.
-    gcc -m32 -c kernel/apps/textedit/textedit.c -o $build_dir/textedit.o -std=gnu99 -ffreestanding -w -I.
     gcc -m32 -c kernel/apps/calculator/calculator.c -o $build_dir/calculator.o -std=gnu99 -ffreestanding -w -I.
-    gcc -m32 -c kernel/apps/serialapp/serialapp.c -o $build_dir/serialapp.o -std=gnu99 -ffreestanding -w -I.
-    gcc -m32 -c kernel/apps/slang/slang.c -o $build_dir/slang.o -std=gnu99 -ffreestanding -w -I.
     gcc -m32 -c kernel/apps/man/man.c -o $build_dir/man.o -std=gnu99 -ffreestanding -w -I.
     gcc -m32 -c kernel/apps/xgui/xgui.c -o $build_dir/xgui.o -std=gnu99 -ffreestanding -w -I.
     gcc -m32 -c kernel/apps/xander/xander.c -o $build_dir/xander.o -std=gnu99 -ffreestanding -w -I.
@@ -93,7 +58,6 @@ function compile {
     # OLDSHELL
     # gcc -m32 -c kernel/shell.c -o shell.o -std=gnu99 -ffreestanding -w -I.
     
-    gcc -m32 -c kernel/pic/pic.c -o $build_dir/pic.o -std=gnu99 -ffreestanding -w -I.
     gcc -m32 -c kernel/shell/lshell.c -o $build_dir/lshell.o -std=gnu99 -ffreestanding -w -I.
     gcc -m32 -c kernel/panic.c -o $build_dir/panic.o -std=gnu99 -ffreestanding -w -I.
     
@@ -105,7 +69,28 @@ function compile {
     
     echo "Starting the linking of ALL object files..."
     
-    ld -m elf_i386 -T ../boot/linker.ld kernel.o screen.o utils.o keyboard.o ports.o lshell.o apps.o man.o xgui.o xander.o cowsay.o cpuid.o load_idt.o gdt.o idt.o isr.o vfs.o initrd.o serial.o panic.o pci.o rtc.o mouse.o pic.o ata.o fs.o acpi.o textedit.o math.o calculator.o serialapp.o slang.o tar.o printf.o pcspeaker.o timer.o boot.o load_gdt.o -o $OS_NAME.bin -nostdlib --allow-multiple-definition
+    ld -m elf_i386 -T ../boot/linker.ld \
+    boot.o \
+    keyboard.o \
+    ports.o \
+    screen.o \
+    assert.o \
+    math.o \
+    memory.o \
+    rtc.o \
+    string.o \
+    exit.o \
+    printf.o \
+    utils.o \
+    panic.o \
+    apps.o \
+    cowsay.o \
+    calculator.o \
+    man.o \
+    xgui.o \
+    xander.o \
+    lshell.o \
+    kernel.o -o $OS_NAME.bin -nostdlib --allow-multiple-definition
     
     mv $OS_NAME.bin ../
     cd ..

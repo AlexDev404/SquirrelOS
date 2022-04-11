@@ -7,56 +7,21 @@
 #include "drivers/screen/screen.h"
 #include "drivers/keyboard/keyboard.h"
 #include "shell/lshell.h"
-#include "gdt/gdt.h"
-#include "idt/idt.h"
-#include "fs/vfs.h"
-#include "fs/initrd/initrd.h"
 #include "kernel/multiboot.h"
-#include "drivers/serial/serial.h"
-#include "drivers/pci/pci.h"
-#include "drivers/mouse/mouse.h"
-#include "fs/fs.h"
-#include "drivers/acpi/acpi.h"
-#include "fs/tar.h"
 #include "include/printf.h"
-#include "drivers/timer/timer.h"
+#include "include/types/types.h"
 
-void kernel_entry(struct multiboot *mboot_ptr)
+void kmain(struct multiboot *mboot_ptr)
 {
-	uint32 initrd_location = *((uint32 *)mboot_ptr->mods_addr);
+    string buffstr = (string)malloc(200);
+    memset(buffstr, 0, strlen(buffstr));
+
 	init_vga(LIGHT_GREY, BLACK); // INIT VGA LIGHT_GREY ON BLACK
-	init_gdt();
-	printf("GDT Initialized\n");
-	beep();
-	init_idt();
-	printf("IDT Initialized\n");
-	serial_init();
-	printf("Serial Driver Initialized\n");
-	pci_init();
-	printf("PCI Driver Initialized\n");
-	init_acpi();
-	printf("Initialised ACPI\n");
-	fs_root = initialise_initrd(initrd_location);
-	if (!fs_root)
-	{
-		panic("RAMDISK error");
-	}
-	else
-	{
-		printf("Loaded Initial RAMDISK\n");
-	}
-	int tarfound = parse(initrd_location);
-	printf("\nFiles Found in RAMDISK: ");
-	print_int(tarfound);
-	printf("\n");
-	fsinit();
-	printf("Initialized the Filesystem\n");
-	mouse_init();
-	printf("Initialized Mouse Driver\n");
 	clearScreen();
-	printf("\nWelcome to SquirrelOS!\nPlease enter a command\n");
+	printf("\n!!!REWRITE-1!!!\nWelcome to SquirrelOS!\nPlease enter a command\n");
 	printf("Enter 'help' for commands\n\n\n");
+//	printf("TEST> ");
+ //   scanf(true);
 	lsh_loop();
 	panic("EXITED KERNEL");
-
 }

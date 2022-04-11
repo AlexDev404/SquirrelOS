@@ -10,8 +10,11 @@
  */
 
 #include "lshell.h"
-#include "cpu/cpuid/cpuid.h"
 #include "kernel/apps/apps.h"
+#include "../../include/memory/memory.h"
+#include "../../include/string/string.h"
+#include "drivers/screen/screen.h"
+#include "drivers/keyboard/keyboard.h"
 
 // VGA COLOR [ MOVED - DECLARED IN SCREEN.H]
 
@@ -50,7 +53,7 @@ int lsh_man(char **args);
 char *prompt = "LSH> ";
 char os_name[] = "SquirrelOS";
 char *echostat = "on";
-char *version = "v0.0.25-alpha";
+char *version = "0.0.25-alpha";
 
 /*
   Function Declarations for builtin shell commands:
@@ -63,8 +66,6 @@ int lsh_exit(char **args);
  */
 char *builtin_str[] = {
     "help",
-    "exit",
-    "ls",
     "echo",
     "clear",
     "about",
@@ -73,8 +74,6 @@ char *builtin_str[] = {
 
 int (*builtin_func[])(char **) = {
     &lsh_help,
-    &lsh_exit,
-    &lsh_ls,
     &lsh_echo,
     &lsh_clear,
     &about,
@@ -231,23 +230,6 @@ int lsh_echo(char **args)
     return 1;
 }
 
-int lsh_ls(char **args)
-{
-    char *name;
-    for (int i = 0; i < file_count(); ++i)
-    {
-        name = file_get_name(i);
-        if (name != FILE_NOT_FOUND)
-        {
-            print_string(name);
-            int size = file_size(name);
-            print_string("\t");
-            print_int(size);
-            print_string("\n");
-        }
-    }
-    return 1;
-}
 
 int lsh_help(char **args)
 {
@@ -265,6 +247,7 @@ int lsh_help(char **args)
     return 1;
 }
 
+/*
 int lsh_exit(char **args)
 {
     printf("Executing This Command Will Power Off The System.\nAre you sure you want to do carry forth with this? (y / n) ");
@@ -288,6 +271,8 @@ int lsh_exit(char **args)
         return 1;
     }
 }
+
+*/
 
 /*
  *
@@ -347,7 +332,7 @@ char *lsh_read_line(void)
         // Read a character
         // If set to false, backspace breaks for some reason...
 
-        c = readStrShell(true, buffer);
+        c = scanf(true, buffer);
         //char *strcat(c, returnValue);
 
         // THIS CODE RUNS AFTER A CARRIAGE RETURN
@@ -367,7 +352,7 @@ char *lsh_read_line(void)
             buffer = realloc(buffer, malloc(sizeof(char) * bufsize), bufsize * 2);
             if (!buffer)
             {
-                print_string("lsh: readline: allocation error\n");
+                print_string("lsh: readline-internal: allocation error\n");
                 panic("MEM_ERR");
             }
         }

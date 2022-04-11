@@ -46,3 +46,16 @@ int pow(int base, int power)
     else
         return base*pow(base, power/2)*pow(base, power/2);
 }
+
+double floor(double num) {
+    if (num >= LLONG_MAX || num <= LLONG_MIN || num != num) {
+        /* handle large values, infinities and NaNs */
+        return num;
+    }
+    long long n = (long long)num;
+    double d = (double)n;
+    if (d == num || num >= 0)
+        return d;
+    else
+        return d - 1;
+}

@@ -1,0 +1,17 @@
+function rand(RAND_MAX, seed) {
+   let next;
+   if(!RAND_MAX){
+      RAND_MAX = 999;
+   }
+
+   if (!seed) {
+      next = Math.floor(+new Date() / 1000);
+	// console.log("There is NOT a seed");
+   } else {
+	seed = parseFloat(seed)
+      next = seed;
+	// console.log("There is a seed");
+   }
+   next = next * 1103515245 + 12345;
+   return ((next / 65536) % RAND_MAX) + 1;
+}

@@ -8,9 +8,9 @@ Licensed under MIT ( https://github.com/xing1357/SimpleOS/blob/main/LICENSE )
 
 #include "keycodes.h"
 #include "include/types/types.h"
+#include "include/memory/memory.h"
+#include "include/string/string.h"
 
-string readStr();
-string readStrShell(bool prompt, string buffstr);
-string textedit_readStr();
+string scanf();
 
 #endif

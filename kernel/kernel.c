@@ -47,8 +47,7 @@ uint32_t *get_pixel(x, y)
 
 void putpixel(int pos_x, int pos_y, int VGA_COLOR)
 {
-    uint32_t *location = get_pixel(pos_x, pos_y);
-    *location = VGA_COLOR;
+    *get_pixel(pos_x, pos_y) = VGA_COLOR;
 	
 }
 
@@ -60,5 +59,5 @@ void kmain(struct multiboot *mboot_ptr)
 	memset(buffstr, 0, strlen(buffstr));
 	// Initialize framebuffer
 	init_fb(mboot_ptr);
-	putpixel(1, 1, 4);
+	putpixel(100, 100, 4);
 }

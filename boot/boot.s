@@ -59,6 +59,7 @@ stack_top:
 .type _start, @function
 _start:
 
+    # We are now in 32-bit protected mode.
     # Transfer control to the main kernel.
     # Pass the multiboot header adress and magic number,
     # See https://www.gnu.org/software/grub/manual/multiboot/html_node/Machine-state.html

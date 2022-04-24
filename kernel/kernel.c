@@ -4,24 +4,73 @@
  * Improved upon by Immanuel Garcia
  */
 
-#include "drivers/screen/screen.h" // Screen doesn't work with FB
+// #include "drivers/screen/screen.h" // Screen doesn't work with FB
 #include "drivers/keyboard/keyboard.h"
-#include "shell/lshell.h"
+// #include "shell/lshell.h"
 #include "kernel/multiboot2.h"
-#include "include/printf.h"
+// #include "include/printf.h"
 #include "include/types/types.h"
-#include "panic.h"
+
+typedef struct
+{
+	uintptr_t address;
+	uint32_t pitch;
+	uint32_t width;
+	uint32_t height;
+	uint32_t bpp;
+} fb_t;
+
+static fb_t fb;
+
+/* "fb" stands for "framebuffer" throughout the code.
+ */
+void init_fb(mb2_t *boot)
+{
+	mb2_tag_fb_t *fb_info = (mb2_tag_fb_t *)mb2_find_tag(boot, MB2_TAG_FB);
+
+	// Mappings
+	fb.width = fb_info->width;
+	fb.height = fb_info->height;
+	fb.pitch = fb_info->pitch;
+	fb.bpp = fb_info->bpp;
+
+	/*
+		if (fb.bpp != 32) {
+			printke("unsupported bit depth: %d", fb.bpp);
+		}
+	*/
+	uintptr_t address = (uintptr_t)fb_info->addr;
+	fb.address = address;
+}
+
+uint32_t *get_pixel(x, y)
+{
+	return (uint32_t *)(fb.address + y * fb.pitch + x * fb.bpp / 8); // VESA???
+}
+
+void putpixel(int pos_x, int pos_y, int VGA_COLOR)
+{
+    uint32_t location = get_pixel(pos_x, pos_y);
+    location = VGA_COLOR;
+	
+}
 
 void kmain(struct multiboot *mboot_ptr)
 {
 
+	// Keyboard buffer
+	string buffstr = (string)malloc(200);
+	memset(buffstr, 0, strlen(buffstr));
+	// Initialize framebuffer
+	init_fb(mboot_ptr);
+	putpixel(1, 1, 4);
 
-	init_vga(LIGHT_GREY, BLACK); // INIT VGA LIGHT_GREY ON BLACK
-	clearScreen();
-	printf("Welcome to SquirrelOS!\nPlease enter a command\n");
-	printf("Enter 'help' for commands\n\n\n");
-	// printf("TEST> ");
-	// scanf(true);
-	lsh_loop();
-	panic("EXITED KERNEL");
+	//	init_vga(LIGHT_GREY, BLACK); // INIT VGA LIGHT_GREY ON BLACK
+	//	clearScreen();
+	//	printf("\n!!!REWRITE-1!!!\nWelcome to SquirrelOS!\nPlease enter a command\n");
+	//	printf("Enter 'help' for commands\n\n\n");
+	//	printf("TEST> ");
+	//   scanf(true);
+	//	lsh_loop();
+	//	panic("EXITED KERNEL");
 }

@@ -51,6 +51,7 @@ function compile {
     gcc -m32 -c kernel/apps/apps.c -o $build_dir/apps.o -std=gnu99 -ffreestanding -w -I.
     gcc -m32 -c kernel/apps/cowsay/cowsay.c -o $build_dir/cowsay.o -std=gnu99 -ffreestanding -w -I.
     gcc -m32 -c kernel/apps/calculator/calculator.c -o $build_dir/calculator.o -std=gnu99 -ffreestanding -w -I.
+    gcc -m32 -c kernel/apps/framebuffer/framebuffer.c -o $build_dir/framebuffer.o -std=gnu99 -ffreestanding -w -I.
     gcc -m32 -c kernel/apps/man/man.c -o $build_dir/man.o -std=gnu99 -ffreestanding -w -I.
     gcc -m32 -c kernel/apps/xgui/xgui.c -o $build_dir/xgui.o -std=gnu99 -ffreestanding -w -I.
     gcc -m32 -c kernel/apps/xander/xander.c -o $build_dir/xander.o -std=gnu99 -ffreestanding -w -I.
@@ -59,6 +60,7 @@ function compile {
     # gcc -m32 -c kernel/shell.c -o shell.o -std=gnu99 -ffreestanding -w -I.
     
     gcc -m32 -c kernel/shell/lshell.c -o $build_dir/lshell.o -std=gnu99 -ffreestanding -w -I.
+    gcc -m32 -c kernel/multiboot2.c -o $build_dir/multiboot2.o -std=gnu99 -ffreestanding -w -I.
     gcc -m32 -c kernel/panic.c -o $build_dir/panic.o -std=gnu99 -ffreestanding -w -I.
     
     # KERNEL ENTRY
@@ -86,6 +88,8 @@ function compile {
     apps.o \
     cowsay.o \
     calculator.o \
+    framebuffer.o \
+    multiboot2.o \
     man.o \
     xgui.o \
     xander.o \

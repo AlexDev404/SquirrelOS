@@ -4,24 +4,24 @@
  * Improved upon by Immanuel Garcia
  */
 
-#include "drivers/screen/screen.h"
+#include "drivers/screen/screen.h" // Screen doesn't work with FB
 #include "drivers/keyboard/keyboard.h"
 #include "shell/lshell.h"
-#include "kernel/multiboot.h"
+#include "kernel/multiboot2.h"
 #include "include/printf.h"
 #include "include/types/types.h"
+#include "panic.h"
 
 void kmain(struct multiboot *mboot_ptr)
 {
-    string buffstr = (string)malloc(200);
-    memset(buffstr, 0, strlen(buffstr));
+
 
 	init_vga(LIGHT_GREY, BLACK); // INIT VGA LIGHT_GREY ON BLACK
 	clearScreen();
-	printf("\n!!!REWRITE-1!!!\nWelcome to SquirrelOS!\nPlease enter a command\n");
+	printf("Welcome to SquirrelOS!\nPlease enter a command\n");
 	printf("Enter 'help' for commands\n\n\n");
-//	printf("TEST> ");
- //   scanf(true);
+	// printf("TEST> ");
+	// scanf(true);
 	lsh_loop();
 	panic("EXITED KERNEL");
 }

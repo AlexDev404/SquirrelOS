@@ -18,6 +18,7 @@ Licensed under MIT ( https://github.com/xing1357/SimpleOS/blob/main/LICENSE )
 #include "calculator/calculator.h"
 #include "cowsay/cowsay.h"
 #include "man/man.h"
+#include "framebuffer/framebuffer.h"
 #include "xgui/xgui.h"
 #include "xander/xander.h"
 #include "../../include/string/string.h"
@@ -29,6 +30,7 @@ int VGA_LINE = (VGA_WIDTH / 10) - 5;
 int (*builtin_appFunc[])(char **) = {
     &calculator,
     &ccowsay,
+    &framebuffer,
     &man,
     &xgui,
     &xander};
@@ -36,6 +38,7 @@ int (*builtin_appFunc[])(char **) = {
 char *builtin_apps[] = {
     "calculator",
     "ccowsay",
+    "framebuffer",
     "man",
     "xgui",
     "xander"};

@@ -60,4 +60,10 @@ void kmain(struct multiboot *mboot_ptr)
 	// Initialize framebuffer
 	init_fb(mboot_ptr);
 	putpixel(100, 100, 4);
+	/*
+	printf("%lf\n", lfsr113());
+    printf("%lf\n", lfsr113());
+    printf("%lf\n", lfsr113());
+    printf("%lf\n", lfsr113());
+	*/
 }

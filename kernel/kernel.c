@@ -4,11 +4,8 @@
  * Improved upon by Immanuel Garcia
  */
 
-// #include "drivers/screen/screen.h" // Screen doesn't work with FB
 #include "drivers/keyboard/keyboard.h"
-// #include "shell/lshell.h"
 #include "kernel/multiboot2.h"
-// #include "include/printf.h"
 #include "include/types/types.h"
 
 typedef struct
@@ -50,8 +47,8 @@ uint32_t *get_pixel(x, y)
 
 void putpixel(int pos_x, int pos_y, int VGA_COLOR)
 {
-    uint32_t location = get_pixel(pos_x, pos_y);
-    location = VGA_COLOR;
+    uint32_t *location = get_pixel(pos_x, pos_y);
+    *location = VGA_COLOR;
 	
 }
 
@@ -64,13 +61,4 @@ void kmain(struct multiboot *mboot_ptr)
 	// Initialize framebuffer
 	init_fb(mboot_ptr);
 	putpixel(1, 1, 4);
-
-	//	init_vga(LIGHT_GREY, BLACK); // INIT VGA LIGHT_GREY ON BLACK
-	//	clearScreen();
-	//	printf("\n!!!REWRITE-1!!!\nWelcome to SquirrelOS!\nPlease enter a command\n");
-	//	printf("Enter 'help' for commands\n\n\n");
-	//	printf("TEST> ");
-	//   scanf(true);
-	//	lsh_loop();
-	//	panic("EXITED KERNEL");
 }

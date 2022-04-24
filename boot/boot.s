@@ -28,8 +28,8 @@ multiboot_start:
     .long CHECKSUM
 
     # Graphics tag (Removing this section disables graphics mode)
-     .short TAG_FRAMEBUFFER
      .align 8
+     .short TAG_FRAMEBUFFER
      .short TAG_REQUIRED # 0 for linear, 1 for textmode
      .long 20
     # Resolution (run "videoinfo" in Linux to get a list of available resolutions)

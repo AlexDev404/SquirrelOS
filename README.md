@@ -322,7 +322,7 @@ Run with `qemu-system-x86_64 iso/MyOS.iso`.
 ## Contact Info
 
 - Have any questions/requests/issues? Feel free to contact me at:
-  [rexydogwoof01@gmail.com](mailto:rexydogwoof01@gmail.com).
+  [alexdev404@protonmail.com](mailto:alexdev404@protonmail.com).
   
   
 ## Contributing
